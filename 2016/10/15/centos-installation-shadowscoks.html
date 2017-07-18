@@ -2,7 +2,7 @@
 <html lang="zh-CN">
   <head>
     
-<title>zenghua&#39;s blog</title>
+<title>使用阿里云ECS CentOS 搭建Shadowscoks | zenghua&#39;s blog</title>
 
 <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -13,7 +13,7 @@
 
 
 
-  <meta name="keywords" content="曾华,曾华的博客, zenghua, zenghua&#39;s Blog, JAVA,博客" />
+  <meta name="keywords" content="centos,Shadowscoks,搭建" />
 
 
 
@@ -36,18 +36,19 @@
 
 <link rel="alternate" type="application/atom+xml" title="zenghua&#39;s blog" href="/atom.xml">
 
-<meta name="description" content="zenghua">
-<meta property="og:type" content="website">
-<meta property="og:title" content="zenghua's blog">
-<meta property="og:url" content="http://zenghua.info/index.html">
+<meta name="description" content="新加坡服务器 1核CPU 1GB内存 CentOS 7.0 64位1. 安装Shdowsocks服务端1234#安装pipyum install python-pip#使用pip安装shadowsockspip install shadowsocks">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用阿里云ECS CentOS 搭建Shadowscoks">
+<meta property="og:url" content="http://zenghua.info/2016/10/15/centos-installation-shadowscoks.html">
 <meta property="og:site_name" content="zenghua's blog">
-<meta property="og:description" content="zenghua">
+<meta property="og:description" content="新加坡服务器 1核CPU 1GB内存 CentOS 7.0 64位1. 安装Shdowsocks服务端1234#安装pipyum install python-pip#使用pip安装shadowsockspip install shadowsocks">
+<meta property="og:updated_time" content="2017-07-18T11:11:21.693Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="zenghua's blog">
-<meta name="twitter:description" content="zenghua">
+<meta name="twitter:title" content="使用阿里云ECS CentOS 搭建Shadowscoks">
+<meta name="twitter:description" content="新加坡服务器 1核CPU 1GB内存 CentOS 7.0 64位1. 安装Shdowsocks服务端1234#安装pipyum install python-pip#使用pip安装shadowsockspip install shadowsocks">
 
-<link rel="stylesheet" href="/css/font-awesome.css?t=1500376300194.css">
-<link rel="stylesheet" href="/css/style.css?t=1500376300194.css">
+<link rel="stylesheet" href="/css/font-awesome.css?t=1500376300149.css">
+<link rel="stylesheet" href="/css/style.css?t=1500376300149.css">
 
 
 <script id="google_analytics">
@@ -109,7 +110,7 @@
           
           
           <li class="site-nav-item">
-            <a class="site-nav-link active" href="/">
+            <a class="site-nav-link " href="/">
               
               
                 首页
@@ -168,10 +169,7 @@
     <div class="content">
       <div class="container">
   <main class="main">
-    
-      <section class="article-list">
-        
-          <article class="article">
+    <article class="article">
   <header class="article-header">
     <div class="article-meta">
   <div class="article-date">
@@ -189,9 +187,7 @@
 
     <h2 class="article-title">
   
-    <a class="article-link" href="/2016/10/15/centos-installation-shadowscoks.html">
-      使用阿里云ECS CentOS 搭建Shadowscoks
-    </a>
+    使用阿里云ECS CentOS 搭建Shadowscoks
   
 </h2>
 
@@ -200,98 +196,83 @@
     
     
       <h4 id="新加坡服务器-1核CPU-1GB内存-CentOS-7-0-64位"><a href="#新加坡服务器-1核CPU-1GB内存-CentOS-7-0-64位" class="headerlink" title="新加坡服务器 1核CPU 1GB内存 CentOS 7.0 64位"></a>新加坡服务器 1核CPU 1GB内存 CentOS 7.0 64位</h4><h4 id="1-安装Shdowsocks服务端"><a href="#1-安装Shdowsocks服务端" class="headerlink" title="1. 安装Shdowsocks服务端"></a>1. 安装Shdowsocks服务端</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">#安装pip</div><div class="line">yum install python-pip</div><div class="line">#使用pip安装shadowsocks</div><div class="line">pip install shadowsocks</div></pre></td></tr></table></figure>
-      <div class="readmore">
-        <a href="/2016/10/15/centos-installation-shadowscoks.html" class="readmore-link">
-          阅读更多
-        </a>
-      </div>
-    
-  </div>
-  
-</article>
-         
-        
-          <article class="article">
-  <header class="article-header">
-    <div class="article-meta">
-  <div class="article-date">
-    2016年10月10日
-  </div>
-  <div class="article-categories">
-    <i class="fa fa-caret-right"></i>
-    
-      <a class="article-category" href="/categories/笔记/">
-        笔记
-      </a>
-    
-  </div>
-</div>
+<a id="more"></a>
+<h4 id="2-配置Shdowsocks服务-并启动"><a href="#2-配置Shdowsocks服务-并启动" class="headerlink" title="2.配置Shdowsocks服务,并启动"></a>2.配置Shdowsocks服务,并启动</h4><p>用vim新建 <code>/etc/shadowsocks.json</code> 文件, 并写入以下内容<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">	&quot;server&quot;:&quot;0.0.0.0&quot;,</div><div class="line">	&quot;server_port&quot;:443,</div><div class="line">	&quot;local_address&quot;:&quot;127.0.0.1&quot;,</div><div class="line">	&quot;local_port&quot;:1080,</div><div class="line">	&quot;password&quot;:&quot;your-passwd&quot;,</div><div class="line">	&quot;timeout&quot;:300,</div><div class="line">	&quot;method&quot;:&quot;aes-256-cfb&quot;,</div><div class="line">	&quot;fast_open&quot;:false,</div><div class="line">	&quot;workers&quot;:5</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>注意修改 password<br>workers 表示启动的进程数量<br>shadowsocks启动:<code>ssserver -c /etc/shadowsocks.json -d start</code><br>shadowsocks关闭:<code>ssserver -c /etc/shadowsocks.json -d stop</code></p>
+<h4 id="3-使用本机Shdowsocks客户端-连接服务端上网"><a href="#3-使用本机Shdowsocks客户端-连接服务端上网" class="headerlink" title="3.使用本机Shdowsocks客户端, 连接服务端上网"></a>3.使用本机Shdowsocks客户端, 连接服务端上网</h4><p>下载客户端<br><a href="https://github.com/shadowsocks/shadowsocks-windows/releases" target="_blank" rel="external">windows版本</a><br><a href="https://github.com/shadowsocks/shadowsocks-android/releases" target="_blank" rel="external">安卓版本</a><br>下载后将服务器ip、端口、密码依次填好就行了</p>
 
-    <h2 class="article-title">
+    
+  </div>
   
-    <a class="article-link" href="/2016/10/10/centos-yum-installation-mariadb.html">
-      Centos7.2使用yum安装MariaDB10.1
+    <footer class="article-footer">
+      <div class="article-tags">
+  
+    <a class="article-tag" href="/tags/centos/">
+      <i class="fa fa-tag"></i>
+      centos
     </a>
   
-</h2>
-
-  </header>
-  <div class="article-body markdown">
-    
-    
-      <h3 id="①添加MariaDB的yum源"><a href="#①添加MariaDB的yum源" class="headerlink" title="①添加MariaDB的yum源"></a>①添加MariaDB的yum源</h3><h4 id="1-创建MariaDB-repo"><a href="#1-创建MariaDB-repo" class="headerlink" title="1.创建MariaDB.repo"></a>1.创建MariaDB.repo</h4><blockquote>
-<p>sudo vi /etc/yum.repos.d/Mariadb.repo </p>
-</blockquote>
-      <div class="readmore">
-        <a href="/2016/10/10/centos-yum-installation-mariadb.html" class="readmore-link">
-          阅读更多
-        </a>
-      </div>
-    
-  </div>
-  
-</article>
-         
-        
-          <article class="article">
-  <header class="article-header">
-    <div class="article-meta">
-  <div class="article-date">
-    2016年9月29日
-  </div>
-  <div class="article-categories">
-    <i class="fa fa-caret-right"></i>
-    
-  </div>
-</div>
-
-    <h2 class="article-title">
-  
-    <a class="article-link" href="/2016/09/29/hello-world.html">
-      hello-world
+    <a class="article-tag" href="/tags/Shadowscoks/">
+      <i class="fa fa-tag"></i>
+      Shadowscoks
     </a>
   
-</h2>
+</div>
 
-  </header>
-  <div class="article-body markdown">
+      
+  <div class="article-pagination">
     
-    
-      <p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.<br>
-      <div class="readmore">
-        <a href="/2016/09/29/hello-world.html" class="readmore-link">
-          阅读更多
+      <div class="next-article">
+        <a class="article-link" href="/2016/10/10/centos-yum-installation-mariadb.html">
+          <span class="hint">
+            <i class="fa fa-chevron-left"></i>
+            旧文章
+          </span>
+          <span class="title">Centos7.2使用yum安装MariaDB10.1</span>
         </a>
       </div>
     
+    
   </div>
+
+
+    </footer>
   
 </article>
-         
-        
-      </section>
+
     
-    
+  <!-- 别人用的是disqus
+  <div id="disqus_thread">
+    <noscript>
+      Please enable JavaScript to view the
+      <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+    </noscript>
+  </div>
+  <script id="disqus">
+    var disqus_config = function () {
+        this.page.url = 'http://zenghua.info/2016/10/15/centos-installation-shadowscoks.html';
+        this.page.identifier = '2016/10/15/centos-installation-shadowscoks.html';
+        this.page.title = '使用阿里云ECS CentOS 搭建Shadowscoks';
+    };
+    (function() {
+    var d = document, s = d.createElement('script');
+
+      s.src = '//2138467.disqus.com/embed.js';
+
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();  
+  </script>
+  -->
+  
+<!-- 我用的友言 -->
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2138467"></script>
+<!-- UY END -->
+  
+  
+
   </main>
   <aside class="sidebar">
   
@@ -382,7 +363,6 @@
 </aside>
 
 </div>
-
 
     </div>
     <footer class="footer">
