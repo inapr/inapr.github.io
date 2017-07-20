@@ -46,8 +46,8 @@
 <meta name="twitter:title" content="zenghua's blog">
 <meta name="twitter:description" content="zenghua">
 
-<link rel="stylesheet" href="/css/font-awesome.css?t=1500515153584.css">
-<link rel="stylesheet" href="/css/style.css?t=1500515153584.css">
+<link rel="stylesheet" href="/css/font-awesome.css?t=1500552902170.css">
+<link rel="stylesheet" href="/css/style.css?t=1500552902170.css">
 
 
 <script id="google_analytics">
@@ -175,6 +175,92 @@
   <header class="article-header">
     <div class="article-meta">
   <div class="article-date">
+    2016年11月20日
+  </div>
+  <div class="article-categories">
+    <i class="fa fa-caret-right"></i>
+    
+      <a class="article-category" href="/categories/笔记/">
+        笔记
+      </a>
+    
+  </div>
+</div>
+
+    <h2 class="article-title">
+  
+    <a class="article-link" href="/2016/11/20/springmvc-dispatcherServlet.html">
+      DispatcherServlet详解
+    </a>
+  
+</h2>
+
+  </header>
+  <div class="article-body markdown">
+    
+    
+      <p>display:none和visible:hidden都能把网页上某个元素隐藏起来，但两者有区别:</p>
+<p>HTML 是内容展示带有语义，CSS 是界面样式相关。那么 hidden 这个属性，就表示与浏览者不相关、不重要，浏览器在解析的时候，既然不相关就直接隐藏掉了。如果你有些东西与用户不相关，比如 提交信息的 input 等，就可以用 hidden。display none 就是从界面、视觉上的隐藏。如果你需要临时隐藏一些东西后面会再切换出来，比如 下拉菜单 等，就可以用 display none。因为它不是跟用户不相关，只是目前还不能展示出来。</p>
+<p>display:none —不为被隐藏的对象保留其物理空间，即该对象在页面上彻底消失，</p>
+<p>visible:hidden— 使对象在网页上不可见，但该对象在网页上所占的空间没有改变，</p>
+<p>display:none视为不存在且不加载，即，不为被隐藏的对象保留其物理空间，即该对象在页面上彻底消失。通俗来说就是看不见也摸不到。</p>
+<p>visibility:hidden隐藏，但在浏览时保留位置，即，使对象在网页上不可见，但该对象在网页上所占的空间没有改变。通俗来说就是看不见但摸得到。</p>
+
+      <div class="readmore">
+        <a href="/2016/11/20/springmvc-dispatcherServlet.html" class="readmore-link">
+          阅读更多
+        </a>
+      </div>
+    
+  </div>
+  
+</article>
+         
+        
+          <article class="article">
+  <header class="article-header">
+    <div class="article-meta">
+  <div class="article-date">
+    2016年11月14日
+  </div>
+  <div class="article-categories">
+    <i class="fa fa-caret-right"></i>
+    
+      <a class="article-category" href="/categories/笔记/">
+        笔记
+      </a>
+    
+  </div>
+</div>
+
+    <h2 class="article-title">
+  
+    <a class="article-link" href="/2016/11/14/display-visibility-hidden.html">
+      css中display/visibility和html中hidden的区别
+    </a>
+  
+</h2>
+
+  </header>
+  <div class="article-body markdown">
+    
+    
+      <h4 id="用法："><a href="#用法：" class="headerlink" title="用法："></a>用法：</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">"display:"</span>&gt;</span>显示<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">"display:none;"</span>&gt;</span>隐藏不占位<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">"visibility:"</span>&gt;</span>显示<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">"visibility:hidden;"</span>&gt;</span>隐藏占位<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">div</span> &gt;</span>显示<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">hidden</span>=<span class="string">"hidden"</span>&gt;</span>消失不占位<span class="tag">&lt;/<span class="name">div</span>&gt;</span>或者<span class="tag">&lt;<span class="name">div</span> <span class="attr">hidden</span>&gt;</span>消失不占位<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+      <div class="readmore">
+        <a href="/2016/11/14/display-visibility-hidden.html" class="readmore-link">
+          阅读更多
+        </a>
+      </div>
+    
+  </div>
+  
+</article>
+         
+        
+          <article class="article">
+  <header class="article-header">
+    <div class="article-meta">
+  <div class="article-date">
     2016年10月15日
   </div>
   <div class="article-categories">
@@ -293,44 +379,12 @@
 </article>
          
         
-          <article class="article">
-  <header class="article-header">
-    <div class="article-meta">
-  <div class="article-date">
-    2016年9月29日
-  </div>
-  <div class="article-categories">
-    <i class="fa fa-caret-right"></i>
-    
-  </div>
-</div>
-
-    <h2 class="article-title">
-  
-    <a class="article-link" href="/2016/09/29/hello-world.html">
-      hello-world
-    </a>
-  
-</h2>
-
-  </header>
-  <div class="article-body markdown">
-    
-    
-      <p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.<br>
-      <div class="readmore">
-        <a href="/2016/09/29/hello-world.html" class="readmore-link">
-          阅读更多
-        </a>
-      </div>
-    
-  </div>
-  
-</article>
-         
-        
       </section>
     
+    
+      <div class="paginator">
+        <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">»</a>
+      </div>
     
   </main>
   <aside class="sidebar">
@@ -339,6 +393,18 @@
   <div class="widget recent">
     <h3 class="widget-title">最新文章</h3>
     <ul class="recent-post">
+      
+        <li class="recent-post-item">
+          <a class="recent-post-link" href="/2016/11/20/springmvc-dispatcherServlet.html">
+            DispatcherServlet详解
+          </a>
+        </li>
+      
+        <li class="recent-post-item">
+          <a class="recent-post-link" href="/2016/11/14/display-visibility-hidden.html">
+            css中display/visibility和html中hidden的区别
+          </a>
+        </li>
       
         <li class="recent-post-item">
           <a class="recent-post-link" href="/2016/10/15/centos-installation-shadowscoks.html">
@@ -375,7 +441,7 @@
       标签云
     </h3>
     <div class="tagcloud-wrapper">
-      <a href="/tags/centos/" style="font-size: 22px;">centos</a> <a href="/tags/MariaDB/" style="font-size: 16px;">MariaDB</a> <a href="/tags/jdk8/" style="font-size: 16px;">jdk8</a> <a href="/tags/Shadowscoks/" style="font-size: 16px;">Shadowscoks</a>
+      <a href="/tags/centos/" style="font-size: 22px;">centos</a> <a href="/tags/Shadowscoks/" style="font-size: 16px;">Shadowscoks</a> <a href="/tags/jdk8/" style="font-size: 16px;">jdk8</a> <a href="/tags/html/" style="font-size: 16px;">html</a> <a href="/tags/css/" style="font-size: 16px;">css</a> <a href="/tags/springmvc/" style="font-size: 16px;">springmvc</a> <a href="/tags/MariaDB/" style="font-size: 16px;">MariaDB</a>
     </div>
   </div>
 
@@ -386,7 +452,7 @@
     <h3 class="widget-title">
       分类目录
     </h3>
-    <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/笔记/">笔记</a><span class="category-list-count">3</span></li></ul>
+    <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/笔记/">笔记</a><span class="category-list-count">5</span></li></ul>
   </div>
 
 

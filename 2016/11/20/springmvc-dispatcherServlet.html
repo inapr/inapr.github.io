@@ -2,7 +2,7 @@
 <html lang="zh-CN">
   <head>
     
-<title>Shadowscoks | zenghua&#39;s blog</title>
+<title>DispatcherServlet详解 | zenghua&#39;s blog</title>
 
 <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -13,7 +13,7 @@
 
 
 
-  <meta name="keywords" content="曾华,曾华的博客, zenghua, zenghua&#39;s Blog, JAVA,博客" />
+  <meta name="keywords" content="springmvc,DispatcherServlet" />
 
 
 
@@ -36,18 +36,22 @@
 
 <link rel="alternate" type="application/atom+xml" title="zenghua&#39;s blog" href="/atom.xml">
 
-<meta name="description" content="zenghua">
-<meta property="og:type" content="website">
-<meta property="og:title" content="zenghua's blog">
-<meta property="og:url" content="http://zenghua.info/tags/Shadowscoks/index.html">
+<meta name="description" content="display:none和visible:hidden都能把网页上某个元素隐藏起来，但两者有区别:
+HTML 是内容展示带有语义，CSS 是界面样式相关。那么 hidden 这个属性，就表示与浏览者不相关、不重要，浏览器在解析的时候，既然不相关就直接隐藏掉了。如果你有些东西与用户不相关，比如 提交信息的 input 等，就可以用 hidden。display none 就是从界面、视觉上的隐藏。如">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DispatcherServlet详解">
+<meta property="og:url" content="http://zenghua.info/2016/11/20/springmvc-dispatcherServlet.html">
 <meta property="og:site_name" content="zenghua's blog">
-<meta property="og:description" content="zenghua">
+<meta property="og:description" content="display:none和visible:hidden都能把网页上某个元素隐藏起来，但两者有区别:
+HTML 是内容展示带有语义，CSS 是界面样式相关。那么 hidden 这个属性，就表示与浏览者不相关、不重要，浏览器在解析的时候，既然不相关就直接隐藏掉了。如果你有些东西与用户不相关，比如 提交信息的 input 等，就可以用 hidden。display none 就是从界面、视觉上的隐藏。如">
+<meta property="og:updated_time" content="2017-07-20T07:11:54.477Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="zenghua's blog">
-<meta name="twitter:description" content="zenghua">
+<meta name="twitter:title" content="DispatcherServlet详解">
+<meta name="twitter:description" content="display:none和visible:hidden都能把网页上某个元素隐藏起来，但两者有区别:
+HTML 是内容展示带有语义，CSS 是界面样式相关。那么 hidden 这个属性，就表示与浏览者不相关、不重要，浏览器在解析的时候，既然不相关就直接隐藏掉了。如果你有些东西与用户不相关，比如 提交信息的 input 等，就可以用 hidden。display none 就是从界面、视觉上的隐藏。如">
 
-<link rel="stylesheet" href="/css/font-awesome.css?t=1500552902186.css">
-<link rel="stylesheet" href="/css/style.css?t=1500552902186.css">
+<link rel="stylesheet" href="/css/font-awesome.css?t=1500552902105.css">
+<link rel="stylesheet" href="/css/style.css?t=1500552902105.css">
 
 
 <script id="google_analytics">
@@ -168,38 +172,106 @@
     <div class="content">
       <div class="container">
   <main class="main">
+    <article class="article">
+  <header class="article-header">
+    <div class="article-meta">
+  <div class="article-date">
+    2016年11月20日
+  </div>
+  <div class="article-categories">
+    <i class="fa fa-caret-right"></i>
     
-      <div class="archive">
-        
-          <h2 class="archive-title">
-            <i class="fa fa-tag"></i>
-            Shadowscoks
-          </h2>
-        
-         
-        
-          
-          
-            
-            
-            <section class="archive-section">
-              <div class="archive-year">
-                <a href="/archives/2016" class="archive-year">2016</a>
-              </div>
-              <ul class="archive-list">
-          
-          <li class="archive-item">
-            <span class="article-date">
-              10/15
-            </span>
-            <a class="article-link" href="/2016/10/15/centos-installation-shadowscoks.html">
-              使用阿里云ECS CentOS 搭建Shadowscoks
-            </a>
-          </li>
-        
+      <a class="article-category" href="/categories/笔记/">
+        笔记
+      </a>
+    
+  </div>
+</div>
+
+    <h2 class="article-title">
+  
+    DispatcherServlet详解
+  
+</h2>
+
+  </header>
+  <div class="article-body markdown">
+    
+    
+      <p>display:none和visible:hidden都能把网页上某个元素隐藏起来，但两者有区别:</p>
+<p>HTML 是内容展示带有语义，CSS 是界面样式相关。那么 hidden 这个属性，就表示与浏览者不相关、不重要，浏览器在解析的时候，既然不相关就直接隐藏掉了。如果你有些东西与用户不相关，比如 提交信息的 input 等，就可以用 hidden。display none 就是从界面、视觉上的隐藏。如果你需要临时隐藏一些东西后面会再切换出来，比如 下拉菜单 等，就可以用 display none。因为它不是跟用户不相关，只是目前还不能展示出来。</p>
+<p>display:none —不为被隐藏的对象保留其物理空间，即该对象在页面上彻底消失，</p>
+<p>visible:hidden— 使对象在网页上不可见，但该对象在网页上所占的空间没有改变，</p>
+<p>display:none视为不存在且不加载，即，不为被隐藏的对象保留其物理空间，即该对象在页面上彻底消失。通俗来说就是看不见也摸不到。</p>
+<p>visibility:hidden隐藏，但在浏览时保留位置，即，使对象在网页上不可见，但该对象在网页上所占的空间没有改变。通俗来说就是看不见但摸得到。</p>
+
+    
+  </div>
+  
+    <footer class="article-footer">
+      <div class="article-tags">
+  
+    <a class="article-tag" href="/tags/springmvc/">
+      <i class="fa fa-tag"></i>
+      springmvc
+    </a>
+  
+</div>
+
+      
+  <div class="article-pagination">
+    
+      <div class="next-article">
+        <a class="article-link" href="/2016/11/14/display-visibility-hidden.html">
+          <span class="hint">
+            <i class="fa fa-chevron-left"></i>
+            旧文章
+          </span>
+          <span class="title">css中display/visibility和html中hidden的区别</span>
+        </a>
       </div>
     
     
+  </div>
+
+
+    </footer>
+  
+</article>
+
+    
+  <!-- 别人用的是disqus
+  <div id="disqus_thread">
+    <noscript>
+      Please enable JavaScript to view the
+      <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+    </noscript>
+  </div>
+  <script id="disqus">
+    var disqus_config = function () {
+        this.page.url = 'http://zenghua.info/2016/11/20/springmvc-dispatcherServlet.html';
+        this.page.identifier = '2016/11/20/springmvc-dispatcherServlet.html';
+        this.page.title = 'DispatcherServlet详解';
+    };
+    (function() {
+    var d = document, s = d.createElement('script');
+
+      s.src = '//2138467.disqus.com/embed.js';
+
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();  
+  </script>
+  -->
+  
+<!-- 我用的友言 -->
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2138467"></script>
+<!-- UY END -->
+  
+  
+
   </main>
   <aside class="sidebar">
   
@@ -308,7 +380,6 @@
 </aside>
 
 </div>
-
 
     </div>
     <footer class="footer">
