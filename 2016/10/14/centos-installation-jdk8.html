@@ -42,13 +42,13 @@
 <meta property="og:url" content="http://zenghua.info/2016/10/14/centos-installation-jdk8.html">
 <meta property="og:site_name" content="zenghua's blog">
 <meta property="og:description" content="①下载jdk去jdk下载页面找到要下载的jdk，用wget下载1wget --no-check-certificate --no-cookies --header &amp;quot;Cookie: oraclelicense=accept-securebackup-cookie&amp;quot; http://download.oracle.com/otnpub/java/jdk/8u131b11/d54c1">
-<meta property="og:updated_time" content="2017-07-20T01:43:22.512Z">
+<meta property="og:updated_time" content="2017-07-20T01:45:40.438Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="centos7.2使用rpm安装jdk8">
 <meta name="twitter:description" content="①下载jdk去jdk下载页面找到要下载的jdk，用wget下载1wget --no-check-certificate --no-cookies --header &amp;quot;Cookie: oraclelicense=accept-securebackup-cookie&amp;quot; http://download.oracle.com/otnpub/java/jdk/8u131b11/d54c1">
 
-<link rel="stylesheet" href="/css/font-awesome.css?t=1500515027922.css">
-<link rel="stylesheet" href="/css/style.css?t=1500515027922.css">
+<link rel="stylesheet" href="/css/font-awesome.css?t=1500515153543.css">
+<link rel="stylesheet" href="/css/style.css?t=1500515153543.css">
 
 
 <script id="google_analytics">
@@ -196,6 +196,7 @@
     
     
       <h3 id="①下载jdk"><a href="#①下载jdk" class="headerlink" title="①下载jdk"></a>①下载jdk</h3><p>去<a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html" target="_blank" rel="external">jdk下载页面</a>找到要下载的jdk，用wget下载<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget --no-check-certificate --no-cookies --header &quot;Cookie: oraclelicense=accept-securebackup-cookie&quot; http://download.oracle.com/otnpub/java/jdk/8u131b11/d54c1d3a095b4ff2b6607d096fa80163/jdk-8u131-linux-x64.rpm</div></pre></td></tr></table></figure></p>
+<a id="more"></a>
 <h3 id="②安装jdk"><a href="#②安装jdk" class="headerlink" title="②安装jdk"></a>②安装jdk</h3><pre><code>rpm -ivh jdk-8u131-linux-x64.rpm
 </code></pre><h3 id="③配置环境变量-告诉电脑jdk在哪里"><a href="#③配置环境变量-告诉电脑jdk在哪里" class="headerlink" title="③配置环境变量(告诉电脑jdk在哪里)"></a>③配置环境变量(告诉电脑jdk在哪里)</h3><pre><code>vim /etc/profile //打开环境变量文件
 </code></pre><h4 id="进入insert模式-按字母i-在最后面加上下面这段，然后按esc-然后保存退出-按-wq回车"><a href="#进入insert模式-按字母i-在最后面加上下面这段，然后按esc-然后保存退出-按-wq回车" class="headerlink" title="进入insert模式(按字母i) 在最后面加上下面这段，然后按esc 然后保存退出(按  :wq回车)"></a>进入insert模式(按字母i) 在最后面加上下面这段，然后按esc 然后保存退出(按  :wq回车)</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">JAVA_HOME=/usr/java/jdk1.8.0_131</div><div class="line">CLASSPATH=%JAVA_HOME%/lib:%JAVA_HOME%/jre/lib</div><div class="line">PATH=$PATH:$JAVA_HOME/bin:$JAVA_HOME/jre/bin</div><div class="line">export PATH CLASSPATH JAVA_HOME</div></pre></td></tr></table></figure>
