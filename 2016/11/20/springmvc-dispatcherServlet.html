@@ -2,7 +2,7 @@
 <html lang="zh-CN">
   <head>
     
-<title>DispatcherServlet详解 | zenghua&#39;s blog</title>
+<title>DispatcherServlet调度流程 | zenghua&#39;s blog</title>
 
 <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -36,22 +36,22 @@
 
 <link rel="alternate" type="application/atom+xml" title="zenghua&#39;s blog" href="/atom.xml">
 
-<meta name="description" content="display:none和visible:hidden都能把网页上某个元素隐藏起来，但两者有区别:
-HTML 是内容展示带有语义，CSS 是界面样式相关。那么 hidden 这个属性，就表示与浏览者不相关、不重要，浏览器在解析的时候，既然不相关就直接隐藏掉了。如果你有些东西与用户不相关，比如 提交信息的 input 等，就可以用 hidden。display none 就是从界面、视觉上的隐藏。如">
+<meta name="description" content="DispatcherServlet是前端控制器设计模式的实现，提供Spring Web MVC的集中访问点，而且负责职责的分派，而且与Spring IoC容器无缝集成，从而可以获得Spring的所有好处。
+DispatcherServlet主要用作职责调度工作，本身主要用于控制流程，主要职责如下：1、文件上传解析，如果请求类型是multipart将通过MultipartResolver进行文件上传">
 <meta property="og:type" content="article">
-<meta property="og:title" content="DispatcherServlet详解">
+<meta property="og:title" content="DispatcherServlet调度流程">
 <meta property="og:url" content="http://zenghua.info/2016/11/20/springmvc-dispatcherServlet.html">
 <meta property="og:site_name" content="zenghua's blog">
-<meta property="og:description" content="display:none和visible:hidden都能把网页上某个元素隐藏起来，但两者有区别:
-HTML 是内容展示带有语义，CSS 是界面样式相关。那么 hidden 这个属性，就表示与浏览者不相关、不重要，浏览器在解析的时候，既然不相关就直接隐藏掉了。如果你有些东西与用户不相关，比如 提交信息的 input 等，就可以用 hidden。display none 就是从界面、视觉上的隐藏。如">
-<meta property="og:updated_time" content="2017-07-20T07:11:54.477Z">
+<meta property="og:description" content="DispatcherServlet是前端控制器设计模式的实现，提供Spring Web MVC的集中访问点，而且负责职责的分派，而且与Spring IoC容器无缝集成，从而可以获得Spring的所有好处。
+DispatcherServlet主要用作职责调度工作，本身主要用于控制流程，主要职责如下：1、文件上传解析，如果请求类型是multipart将通过MultipartResolver进行文件上传">
+<meta property="og:updated_time" content="2017-07-20T12:25:43.661Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="DispatcherServlet详解">
-<meta name="twitter:description" content="display:none和visible:hidden都能把网页上某个元素隐藏起来，但两者有区别:
-HTML 是内容展示带有语义，CSS 是界面样式相关。那么 hidden 这个属性，就表示与浏览者不相关、不重要，浏览器在解析的时候，既然不相关就直接隐藏掉了。如果你有些东西与用户不相关，比如 提交信息的 input 等，就可以用 hidden。display none 就是从界面、视觉上的隐藏。如">
+<meta name="twitter:title" content="DispatcherServlet调度流程">
+<meta name="twitter:description" content="DispatcherServlet是前端控制器设计模式的实现，提供Spring Web MVC的集中访问点，而且负责职责的分派，而且与Spring IoC容器无缝集成，从而可以获得Spring的所有好处。
+DispatcherServlet主要用作职责调度工作，本身主要用于控制流程，主要职责如下：1、文件上传解析，如果请求类型是multipart将通过MultipartResolver进行文件上传">
 
-<link rel="stylesheet" href="/css/font-awesome.css?t=1500552902105.css">
-<link rel="stylesheet" href="/css/style.css?t=1500552902105.css">
+<link rel="stylesheet" href="/css/font-awesome.css?t=1500553664034.css">
+<link rel="stylesheet" href="/css/style.css?t=1500553664034.css">
 
 
 <script id="google_analytics">
@@ -190,7 +190,7 @@ HTML 是内容展示带有语义，CSS 是界面样式相关。那么 hidden 这
 
     <h2 class="article-title">
   
-    DispatcherServlet详解
+    DispatcherServlet调度流程
   
 </h2>
 
@@ -198,12 +198,9 @@ HTML 是内容展示带有语义，CSS 是界面样式相关。那么 hidden 这
   <div class="article-body markdown">
     
     
-      <p>display:none和visible:hidden都能把网页上某个元素隐藏起来，但两者有区别:</p>
-<p>HTML 是内容展示带有语义，CSS 是界面样式相关。那么 hidden 这个属性，就表示与浏览者不相关、不重要，浏览器在解析的时候，既然不相关就直接隐藏掉了。如果你有些东西与用户不相关，比如 提交信息的 input 等，就可以用 hidden。display none 就是从界面、视觉上的隐藏。如果你需要临时隐藏一些东西后面会再切换出来，比如 下拉菜单 等，就可以用 display none。因为它不是跟用户不相关，只是目前还不能展示出来。</p>
-<p>display:none —不为被隐藏的对象保留其物理空间，即该对象在页面上彻底消失，</p>
-<p>visible:hidden— 使对象在网页上不可见，但该对象在网页上所占的空间没有改变，</p>
-<p>display:none视为不存在且不加载，即，不为被隐藏的对象保留其物理空间，即该对象在页面上彻底消失。通俗来说就是看不见也摸不到。</p>
-<p>visibility:hidden隐藏，但在浏览时保留位置，即，使对象在网页上不可见，但该对象在网页上所占的空间没有改变。通俗来说就是看不见但摸得到。</p>
+      <p>DispatcherServlet是前端控制器设计模式的实现，提供Spring Web MVC的集中访问点，<br>而且负责职责的分派，而且与Spring IoC容器无缝集成，从而可以获得Spring的所有好处。</p>
+<p>DispatcherServlet主要用作职责调度工作，本身主要用于控制流程，主要职责如下：<br>1、文件上传解析，如果请求类型是multipart将通过MultipartResolver进行文件上传解析；<br>2、通过HandlerMapping，将请求映射到处理器（返回一个HandlerExecutionChain，它包括一个处理器、多个HandlerInterceptor拦截器）；<br>3、通过HandlerAdapter支持多种类型的处理器(HandlerExecutionChain中的处理器)；<br>4、通过ViewResolver解析逻辑视图名到具体视图实现；<br>5、本地化解析；<br>6、渲染具体的视图等；<br>7、如果执行过程中遇到异常将交给HandlerExceptionResolver来解析。</p>
+<p>从以上我们可以看出DispatcherServlet主要负责流程的控制（而且在流程中的每个关键点都是很容易扩展的）。</p>
 
     
   </div>
@@ -251,7 +248,7 @@ HTML 是内容展示带有语义，CSS 是界面样式相关。那么 hidden 这
     var disqus_config = function () {
         this.page.url = 'http://zenghua.info/2016/11/20/springmvc-dispatcherServlet.html';
         this.page.identifier = '2016/11/20/springmvc-dispatcherServlet.html';
-        this.page.title = 'DispatcherServlet详解';
+        this.page.title = 'DispatcherServlet调度流程';
     };
     (function() {
     var d = document, s = d.createElement('script');
@@ -282,7 +279,7 @@ HTML 是内容展示带有语义，CSS 是界面样式相关。那么 hidden 这
       
         <li class="recent-post-item">
           <a class="recent-post-link" href="/2016/11/20/springmvc-dispatcherServlet.html">
-            DispatcherServlet详解
+            DispatcherServlet调度流程
           </a>
         </li>
       
@@ -327,7 +324,7 @@ HTML 是内容展示带有语义，CSS 是界面样式相关。那么 hidden 这
       标签云
     </h3>
     <div class="tagcloud-wrapper">
-      <a href="/tags/centos/" style="font-size: 22px;">centos</a> <a href="/tags/Shadowscoks/" style="font-size: 16px;">Shadowscoks</a> <a href="/tags/jdk8/" style="font-size: 16px;">jdk8</a> <a href="/tags/html/" style="font-size: 16px;">html</a> <a href="/tags/css/" style="font-size: 16px;">css</a> <a href="/tags/springmvc/" style="font-size: 16px;">springmvc</a> <a href="/tags/MariaDB/" style="font-size: 16px;">MariaDB</a>
+      <a href="/tags/centos/" style="font-size: 22px;">centos</a> <a href="/tags/Shadowscoks/" style="font-size: 16px;">Shadowscoks</a> <a href="/tags/MariaDB/" style="font-size: 16px;">MariaDB</a> <a href="/tags/jdk8/" style="font-size: 16px;">jdk8</a> <a href="/tags/html/" style="font-size: 16px;">html</a> <a href="/tags/css/" style="font-size: 16px;">css</a> <a href="/tags/springmvc/" style="font-size: 16px;">springmvc</a>
     </div>
   </div>
 

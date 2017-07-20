@@ -42,13 +42,13 @@
 <meta property="og:url" content="http://zenghua.info/2016/11/14/display-visibility-hidden.html">
 <meta property="og:site_name" content="zenghua's blog">
 <meta property="og:description" content="用法：12345678&amp;lt;div style=&quot;display:&quot;&amp;gt;显示&amp;lt;/div&amp;gt;&amp;lt;div style=&quot;display:none;&quot;&amp;gt;隐藏不占位&amp;lt;/div&amp;gt;&amp;lt;div style=&quot;visibility:&quot;&amp;gt;显示&amp;lt;/div&amp;gt;&amp;lt;div style=&quot;visibility:hidden;&quot;&amp;gt;隐藏占位&amp;lt;/div&amp;g">
-<meta property="og:updated_time" content="2017-07-20T12:13:11.633Z">
+<meta property="og:updated_time" content="2017-07-20T12:19:56.775Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="css中display/visibility和html中hidden的区别">
 <meta name="twitter:description" content="用法：12345678&amp;lt;div style=&quot;display:&quot;&amp;gt;显示&amp;lt;/div&amp;gt;&amp;lt;div style=&quot;display:none;&quot;&amp;gt;隐藏不占位&amp;lt;/div&amp;gt;&amp;lt;div style=&quot;visibility:&quot;&amp;gt;显示&amp;lt;/div&amp;gt;&amp;lt;div style=&quot;visibility:hidden;&quot;&amp;gt;隐藏占位&amp;lt;/div&amp;g">
 
-<link rel="stylesheet" href="/css/font-awesome.css?t=1500552902123.css">
-<link rel="stylesheet" href="/css/style.css?t=1500552902123.css">
+<link rel="stylesheet" href="/css/font-awesome.css?t=1500553664049.css">
+<link rel="stylesheet" href="/css/style.css?t=1500553664049.css">
 
 
 <script id="google_analytics">
@@ -197,9 +197,8 @@
     
       <h4 id="用法："><a href="#用法：" class="headerlink" title="用法："></a>用法：</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">"display:"</span>&gt;</span>显示<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">"display:none;"</span>&gt;</span>隐藏不占位<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">"visibility:"</span>&gt;</span>显示<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">"visibility:hidden;"</span>&gt;</span>隐藏占位<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">div</span> &gt;</span>显示<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">hidden</span>=<span class="string">"hidden"</span>&gt;</span>消失不占位<span class="tag">&lt;/<span class="name">div</span>&gt;</span>或者<span class="tag">&lt;<span class="name">div</span> <span class="attr">hidden</span>&gt;</span>消失不占位<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
 <a id="more"></a>
-<h4 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">CSS display 属性</div><div class="line">　隐藏必须使用none值，该隐藏不占位，页面源代码可见。</div><div class="line">　显示可使用空或block或inline，意思分别为：无此属性、显示视为div（有换行符）、显示视为span（无换行符）。</div><div class="line">CSS visibility 属性</div><div class="line">　隐藏必须使用hidden值，该隐藏占位，页面源代码可见。</div><div class="line">　显示可使用空或visible，意思分别为：无此属性、显示。</div><div class="line">HTML hidden 属性</div><div class="line">　隐藏只需标注hidden</div><div class="line">　显示不标注hidden</div><div class="line">　</div><div class="line">HTML 是内容展示带有语义，CSS 是界面样式相关。</div><div class="line">HTML hidden 这个属性，就表示与浏览者不相关、不重要，浏览器在解析的时候，既然不相关就直接隐藏掉了。如果你有些东西与用户不相关，比如 提交信息的 input 等，就可以用 hidden。</div><div class="line">css中display/visibility就是从界面、视觉上的隐藏。如果你需要临时隐藏一些东西后面会再切换出来，比如下拉菜单等，就可以用display/visibility。因为它不是跟用户不相关，只是目前还不能展示出来。</div></pre></td></tr></table></figure>
-<p>####<a href="http://www.makaidong.com/%E5%8D%9A%E5%AE%A2%E5%9B%AD%E7%9F%A5%E9%81%93/16989.shtml" target="_blank" rel="external">原文出处</a></p>
-
+<h4 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">CSS display 属性</div><div class="line">　隐藏必须使用none值，该隐藏不占位，页面源代码可见。</div><div class="line">　显示可使用空或block或inline，意思分别为：无此属性、显示视为div（有换行符）、显示视为span（无换行符）。</div><div class="line">CSS visibility 属性</div><div class="line">　隐藏必须使用hidden值，该隐藏占位，页面源代码可见。</div><div class="line">　显示可使用空或visible，意思分别为：无此属性、显示。</div><div class="line">HTML hidden 属性</div><div class="line">　隐藏只需标注hidden</div><div class="line">　显示不标注hidden</div><div class="line">　</div><div class="line">HTML 是内容展示带有语义，CSS 是界面样式相关。</div><div class="line">HTML hidden 这个属性，就表示与浏览者不相关、不重要，浏览器在解析的时候，既然不相关就直接隐藏掉了。</div><div class="line">如果你有些东西与用户不相关，比如 提交信息的 input 等，就可以用 hidden。</div><div class="line">css中display/visibility就是从界面、视觉上的隐藏。如果你需要临时隐藏一些东西后面会再切换出来，</div><div class="line">比如下拉菜单等，就可以用display/visibility。因为它不是跟用户不相关，只是目前还不能展示出来。</div></pre></td></tr></table></figure>
+<h4 id="原文出处"><a href="#原文出处" class="headerlink" title="原文出处"></a><a href="http://www.makaidong.com/%E5%8D%9A%E5%AE%A2%E5%9B%AD%E7%9F%A5%E9%81%93/16989.shtml" target="_blank" rel="external">原文出处</a></h4>
     
   </div>
   
@@ -238,7 +237,7 @@
             新文章
             <i class="fa fa-chevron-right"></i>
           </span>
-          <span class="title">DispatcherServlet详解</span>
+          <span class="title">DispatcherServlet调度流程</span>
         </a>
       </div>
     
@@ -292,7 +291,7 @@
       
         <li class="recent-post-item">
           <a class="recent-post-link" href="/2016/11/20/springmvc-dispatcherServlet.html">
-            DispatcherServlet详解
+            DispatcherServlet调度流程
           </a>
         </li>
       
@@ -337,7 +336,7 @@
       标签云
     </h3>
     <div class="tagcloud-wrapper">
-      <a href="/tags/centos/" style="font-size: 22px;">centos</a> <a href="/tags/Shadowscoks/" style="font-size: 16px;">Shadowscoks</a> <a href="/tags/jdk8/" style="font-size: 16px;">jdk8</a> <a href="/tags/html/" style="font-size: 16px;">html</a> <a href="/tags/css/" style="font-size: 16px;">css</a> <a href="/tags/springmvc/" style="font-size: 16px;">springmvc</a> <a href="/tags/MariaDB/" style="font-size: 16px;">MariaDB</a>
+      <a href="/tags/centos/" style="font-size: 22px;">centos</a> <a href="/tags/Shadowscoks/" style="font-size: 16px;">Shadowscoks</a> <a href="/tags/MariaDB/" style="font-size: 16px;">MariaDB</a> <a href="/tags/jdk8/" style="font-size: 16px;">jdk8</a> <a href="/tags/html/" style="font-size: 16px;">html</a> <a href="/tags/css/" style="font-size: 16px;">css</a> <a href="/tags/springmvc/" style="font-size: 16px;">springmvc</a>
     </div>
   </div>
 
