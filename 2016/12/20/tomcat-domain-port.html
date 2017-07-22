@@ -2,7 +2,7 @@
 <html lang="zh-CN">
   <head>
     
-<title>css中display/visibility和html中hidden的区别 | zenghua&#39;s blog</title>
+<title>tomcat多端口多域名访问 | zenghua&#39;s blog</title>
 
 <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -13,7 +13,7 @@
 
 
 
-  <meta name="keywords" content="display:none,visibility:hidden,hidden" />
+  <meta name="keywords" content="tomcat,多端口,多域名" />
 
 
 
@@ -36,19 +36,19 @@
 
 <link rel="alternate" type="application/atom+xml" title="zenghua&#39;s blog" href="/atom.xml">
 
-<meta name="description" content="用法：12345678&amp;lt;div style=&quot;display:&quot;&amp;gt;显示&amp;lt;/div&amp;gt;&amp;lt;div style=&quot;display:none;&quot;&amp;gt;隐藏不占位&amp;lt;/div&amp;gt;&amp;lt;div style=&quot;visibility:&quot;&amp;gt;显示&amp;lt;/div&amp;gt;&amp;lt;div style=&quot;visibility:hidden;&quot;&amp;gt;隐藏占位&amp;lt;/div&amp;g">
+<meta name="description" content="多端口访问新建一个协议为http类型的Connector(连接器) ,修改端口号12&amp;lt;Connector port=&quot;8080&quot; protocol=&quot;HTTP/1.1&quot; connectionTimeout=&quot;20000&quot; redirectPort=&quot;8443&quot; /&amp;gt;&amp;lt;Connector port=&quot;80&quot; protocol=&quot;HTTP/1.1&quot; connectionTimeout">
 <meta property="og:type" content="article">
-<meta property="og:title" content="css中display/visibility和html中hidden的区别">
-<meta property="og:url" content="http://zenghua.info/2016/11/14/display-visibility-hidden.html">
+<meta property="og:title" content="tomcat多端口多域名访问">
+<meta property="og:url" content="http://zenghua.info/2016/12/20/tomcat-domain-port.html">
 <meta property="og:site_name" content="zenghua's blog">
-<meta property="og:description" content="用法：12345678&amp;lt;div style=&quot;display:&quot;&amp;gt;显示&amp;lt;/div&amp;gt;&amp;lt;div style=&quot;display:none;&quot;&amp;gt;隐藏不占位&amp;lt;/div&amp;gt;&amp;lt;div style=&quot;visibility:&quot;&amp;gt;显示&amp;lt;/div&amp;gt;&amp;lt;div style=&quot;visibility:hidden;&quot;&amp;gt;隐藏占位&amp;lt;/div&amp;g">
-<meta property="og:updated_time" content="2017-07-20T12:19:56.775Z">
+<meta property="og:description" content="多端口访问新建一个协议为http类型的Connector(连接器) ,修改端口号12&amp;lt;Connector port=&quot;8080&quot; protocol=&quot;HTTP/1.1&quot; connectionTimeout=&quot;20000&quot; redirectPort=&quot;8443&quot; /&amp;gt;&amp;lt;Connector port=&quot;80&quot; protocol=&quot;HTTP/1.1&quot; connectionTimeout">
+<meta property="og:updated_time" content="2017-07-22T02:59:09.812Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="css中display/visibility和html中hidden的区别">
-<meta name="twitter:description" content="用法：12345678&amp;lt;div style=&quot;display:&quot;&amp;gt;显示&amp;lt;/div&amp;gt;&amp;lt;div style=&quot;display:none;&quot;&amp;gt;隐藏不占位&amp;lt;/div&amp;gt;&amp;lt;div style=&quot;visibility:&quot;&amp;gt;显示&amp;lt;/div&amp;gt;&amp;lt;div style=&quot;visibility:hidden;&quot;&amp;gt;隐藏占位&amp;lt;/div&amp;g">
+<meta name="twitter:title" content="tomcat多端口多域名访问">
+<meta name="twitter:description" content="多端口访问新建一个协议为http类型的Connector(连接器) ,修改端口号12&amp;lt;Connector port=&quot;8080&quot; protocol=&quot;HTTP/1.1&quot; connectionTimeout=&quot;20000&quot; redirectPort=&quot;8443&quot; /&amp;gt;&amp;lt;Connector port=&quot;80&quot; protocol=&quot;HTTP/1.1&quot; connectionTimeout">
 
-<link rel="stylesheet" href="/css/font-awesome.css?t=1500692425015.css">
-<link rel="stylesheet" href="/css/style.css?t=1500692425015.css">
+<link rel="stylesheet" href="/css/font-awesome.css?t=1500692425005.css">
+<link rel="stylesheet" href="/css/style.css?t=1500692425005.css">
 
 
 <script id="google_analytics">
@@ -173,7 +173,7 @@
   <header class="article-header">
     <div class="article-meta">
   <div class="article-date">
-    2016年11月14日
+    2016年12月20日
   </div>
   <div class="article-categories">
     <i class="fa fa-caret-right"></i>
@@ -187,7 +187,7 @@
 
     <h2 class="article-title">
   
-    css中display/visibility和html中hidden的区别
+    tomcat多端口多域名访问
   
 </h2>
 
@@ -195,24 +195,23 @@
   <div class="article-body markdown">
     
     
-      <h4 id="用法："><a href="#用法：" class="headerlink" title="用法："></a>用法：</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">"display:"</span>&gt;</span>显示<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">"display:none;"</span>&gt;</span>隐藏不占位<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">"visibility:"</span>&gt;</span>显示<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">"visibility:hidden;"</span>&gt;</span>隐藏占位<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">div</span> &gt;</span>显示<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">hidden</span>=<span class="string">"hidden"</span>&gt;</span>消失不占位<span class="tag">&lt;/<span class="name">div</span>&gt;</span>或者<span class="tag">&lt;<span class="name">div</span> <span class="attr">hidden</span>&gt;</span>消失不占位<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+      <h3 id="多端口访问"><a href="#多端口访问" class="headerlink" title="多端口访问"></a>多端口访问</h3><p>新建一个协议为http类型的Connector(连接器) ,修改端口号<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">Connector</span> <span class="attr">port</span>=<span class="string">"8080"</span> <span class="attr">protocol</span>=<span class="string">"HTTP/1.1"</span> <span class="attr">connectionTimeout</span>=<span class="string">"20000"</span> <span class="attr">redirectPort</span>=<span class="string">"8443"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">Connector</span> <span class="attr">port</span>=<span class="string">"80"</span> <span class="attr">protocol</span>=<span class="string">"HTTP/1.1"</span> <span class="attr">connectionTimeout</span>=<span class="string">"20000"</span> <span class="attr">redirectPort</span>=<span class="string">"8443"</span> /&gt;</span></div></pre></td></tr></table></figure></p>
+<p>此时端口80和8080都可以访问tomcat中的项目</p>
 <a id="more"></a>
-<h4 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">CSS display 属性</div><div class="line">　隐藏必须使用none值，该隐藏不占位，页面源代码可见。</div><div class="line">　显示可使用空或block或inline，意思分别为：无此属性、显示视为div（有换行符）、显示视为span（无换行符）。</div><div class="line">CSS visibility 属性</div><div class="line">　隐藏必须使用hidden值，该隐藏占位，页面源代码可见。</div><div class="line">　显示可使用空或visible，意思分别为：无此属性、显示。</div><div class="line">HTML hidden 属性</div><div class="line">　隐藏只需标注hidden</div><div class="line">　显示不标注hidden</div><div class="line">　</div><div class="line">HTML 是内容展示带有语义，CSS 是界面样式相关。</div><div class="line">HTML hidden 这个属性，就表示与浏览者不相关、不重要，浏览器在解析的时候，既然不相关就直接隐藏掉了。</div><div class="line">如果你有些东西与用户不相关，比如 提交信息的 input 等，就可以用 hidden。</div><div class="line">css中display/visibility就是从界面、视觉上的隐藏。如果你需要临时隐藏一些东西后面会再切换出来，</div><div class="line">比如下拉菜单等，就可以用display/visibility。因为它不是跟用户不相关，只是目前还不能展示出来。</div></pre></td></tr></table></figure>
-<h4 id="原文出处"><a href="#原文出处" class="headerlink" title="原文出处"></a><a href="http://www.makaidong.com/%E5%8D%9A%E5%AE%A2%E5%9B%AD%E7%9F%A5%E9%81%93/16989.shtml" target="_blank" rel="external">原文出处</a></h4>
+<h3 id="多域名访问-同端口"><a href="#多域名访问-同端口" class="headerlink" title="多域名访问(同端口)"></a>多域名访问(同端口)</h3><p>复制一个host<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">Host</span> <span class="attr">name</span>=<span class="string">"www.iili.xyz"</span>  <span class="attr">appBase</span>=<span class="string">"webapps"</span> <span class="attr">unpackWARs</span>=<span class="string">"true"</span> <span class="attr">autoDeploy</span>=<span class="string">"true"</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">Context</span> <span class="attr">path</span>=<span class="string">""</span> <span class="attr">docBase</span>=<span class="string">"/myweb1"</span>/&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">Valve</span> <span class="attr">className</span>=<span class="string">"org.apache.catalina.valves.AccessLogValve"</span> </span></div><div class="line">	<span class="attr">directory</span>=<span class="string">"logs"</span></div><div class="line">	<span class="attr">prefix</span>=<span class="string">"localhost_access_log"</span> <span class="attr">suffix</span>=<span class="string">".txt"</span></div><div class="line">	<span class="attr">pattern</span>=<span class="string">"%h %l %u %t &amp;quot;%r&amp;quot; %s %b"</span> /&gt;</div><div class="line"><span class="tag">&lt;/<span class="name">Host</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">Host</span> <span class="attr">name</span>=<span class="string">"www.21st.com"</span> <span class="attr">appBase</span>=<span class="string">"webapps"</span> <span class="attr">unpackWARs</span>=<span class="string">"true"</span> <span class="attr">autoDeploy</span>=<span class="string">"true"</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">Context</span> <span class="attr">path</span>=<span class="string">""</span> <span class="attr">docBase</span>=<span class="string">"/myweb2"</span>/&gt;</span>   </div><div class="line">	<span class="tag">&lt;<span class="name">Valve</span> <span class="attr">className</span>=<span class="string">"org.apache.catalina.valves.AccessLogValve"</span> </span></div><div class="line">		<span class="attr">directory</span>=<span class="string">"logs"</span></div><div class="line">	    <span class="attr">prefix</span>=<span class="string">"localhost_access_log"</span> <span class="attr">suffix</span>=<span class="string">".txt"</span></div><div class="line">	    <span class="attr">pattern</span>=<span class="string">"%h %l %u %t &amp;quot;%r&amp;quot; %s %b"</span> /&gt;      </div><div class="line"><span class="tag">&lt;/<span class="name">Host</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>www.iili.xyz指定的是webapps文件夹下面的myweb1项目<br>www.21st.com指定的是webapps文件夹下面的myweb2项目</p>
+<h4 id="appBase和docBase的区别"><a href="#appBase和docBase的区别" class="headerlink" title="appBase和docBase的区别"></a>appBase和docBase的区别</h4><p>其实appBase和docBase都可以设置域名映射哪个项目，但是<br>appBase：这个目录下面的子目录将自动被部署为应用，且war文件将被自动解压缩并部署为应用，<br>默认为tomcat下webapps目录，如果不想访问默认ROOT目录，修改这里，<br>同理如果想访问配置目录下应用为默认应用，在此目录下新增ROOT目录文件夹。<br>docBase：只是指向了你某个应用的目录，这个可以和appBase没有任何关系</p>
+<h3 id="tomcat多域名访问（不同的端口号）"><a href="#tomcat多域名访问（不同的端口号）" class="headerlink" title="tomcat多域名访问（不同的端口号）"></a>tomcat多域名访问（不同的端口号）</h3><p>复制一个service<br>对Service name、监听端口、域名名称、默认加载的应用 进行修改。</p>
+
     
   </div>
   
     <footer class="article-footer">
       <div class="article-tags">
   
-    <a class="article-tag" href="/tags/html/">
+    <a class="article-tag" href="/tags/tomcat/">
       <i class="fa fa-tag"></i>
-      html
-    </a>
-  
-    <a class="article-tag" href="/tags/css/">
-      <i class="fa fa-tag"></i>
-      css
+      tomcat
     </a>
   
 </div>
@@ -221,25 +220,15 @@
   <div class="article-pagination">
     
       <div class="next-article">
-        <a class="article-link" href="/2016/10/15/centos-installation-shadowscoks.html">
+        <a class="article-link" href="/2016/11/20/springmvc-dispatcherServlet.html">
           <span class="hint">
             <i class="fa fa-chevron-left"></i>
             旧文章
           </span>
-          <span class="title">使用阿里云ECS CentOS 搭建Shadowscoks</span>
-        </a>
-      </div>
-    
-    
-      <div class="prev-article">
-        <a class="article-link" href="/2016/11/20/springmvc-dispatcherServlet.html">
-          <span class="hint">
-            新文章
-            <i class="fa fa-chevron-right"></i>
-          </span>
           <span class="title">DispatcherServlet调度流程</span>
         </a>
       </div>
+    
     
   </div>
 
@@ -258,9 +247,9 @@
   </div>
   <script id="disqus">
     var disqus_config = function () {
-        this.page.url = 'http://zenghua.info/2016/11/14/display-visibility-hidden.html';
-        this.page.identifier = '2016/11/14/display-visibility-hidden.html';
-        this.page.title = 'css中display/visibility和html中hidden的区别';
+        this.page.url = 'http://zenghua.info/2016/12/20/tomcat-domain-port.html';
+        this.page.identifier = '2016/12/20/tomcat-domain-port.html';
+        this.page.title = 'tomcat多端口多域名访问';
     };
     (function() {
     var d = document, s = d.createElement('script');

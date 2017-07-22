@@ -46,8 +46,8 @@
 <meta name="twitter:title" content="zenghua's blog">
 <meta name="twitter:description" content="zenghua">
 
-<link rel="stylesheet" href="/css/font-awesome.css?t=1500553678621.css">
-<link rel="stylesheet" href="/css/style.css?t=1500553678621.css">
+<link rel="stylesheet" href="/css/font-awesome.css?t=1500692425123.css">
+<link rel="stylesheet" href="/css/style.css?t=1500692425123.css">
 
 
 <script id="google_analytics">
@@ -170,6 +170,47 @@
   <main class="main">
     
       <section class="article-list">
+        
+          <article class="article">
+  <header class="article-header">
+    <div class="article-meta">
+  <div class="article-date">
+    2016年12月20日
+  </div>
+  <div class="article-categories">
+    <i class="fa fa-caret-right"></i>
+    
+      <a class="article-category" href="/categories/笔记/">
+        笔记
+      </a>
+    
+  </div>
+</div>
+
+    <h2 class="article-title">
+  
+    <a class="article-link" href="/2016/12/20/tomcat-domain-port.html">
+      tomcat多端口多域名访问
+    </a>
+  
+</h2>
+
+  </header>
+  <div class="article-body markdown">
+    
+    
+      <h3 id="多端口访问"><a href="#多端口访问" class="headerlink" title="多端口访问"></a>多端口访问</h3><p>新建一个协议为http类型的Connector(连接器) ,修改端口号<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">Connector</span> <span class="attr">port</span>=<span class="string">"8080"</span> <span class="attr">protocol</span>=<span class="string">"HTTP/1.1"</span> <span class="attr">connectionTimeout</span>=<span class="string">"20000"</span> <span class="attr">redirectPort</span>=<span class="string">"8443"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">Connector</span> <span class="attr">port</span>=<span class="string">"80"</span> <span class="attr">protocol</span>=<span class="string">"HTTP/1.1"</span> <span class="attr">connectionTimeout</span>=<span class="string">"20000"</span> <span class="attr">redirectPort</span>=<span class="string">"8443"</span> /&gt;</span></div></pre></td></tr></table></figure></p>
+<p>此时端口80和8080都可以访问tomcat中的项目</p>
+      <div class="readmore">
+        <a href="/2016/12/20/tomcat-domain-port.html" class="readmore-link">
+          阅读更多
+        </a>
+      </div>
+    
+  </div>
+  
+</article>
+         
         
           <article class="article">
   <header class="article-header">
@@ -334,48 +375,6 @@
 </article>
          
         
-          <article class="article">
-  <header class="article-header">
-    <div class="article-meta">
-  <div class="article-date">
-    2016年10月10日
-  </div>
-  <div class="article-categories">
-    <i class="fa fa-caret-right"></i>
-    
-      <a class="article-category" href="/categories/笔记/">
-        笔记
-      </a>
-    
-  </div>
-</div>
-
-    <h2 class="article-title">
-  
-    <a class="article-link" href="/2016/10/10/centos-yum-installation-mariadb.html">
-      Centos7.2使用yum安装MariaDB10.1
-    </a>
-  
-</h2>
-
-  </header>
-  <div class="article-body markdown">
-    
-    
-      <h3 id="①添加MariaDB的yum源"><a href="#①添加MariaDB的yum源" class="headerlink" title="①添加MariaDB的yum源"></a>①添加MariaDB的yum源</h3><h4 id="1-创建MariaDB-repo"><a href="#1-创建MariaDB-repo" class="headerlink" title="1.创建MariaDB.repo"></a>1.创建MariaDB.repo</h4><blockquote>
-<p>sudo vi /etc/yum.repos.d/Mariadb.repo </p>
-</blockquote>
-      <div class="readmore">
-        <a href="/2016/10/10/centos-yum-installation-mariadb.html" class="readmore-link">
-          阅读更多
-        </a>
-      </div>
-    
-  </div>
-  
-</article>
-         
-        
       </section>
     
     
@@ -390,6 +389,12 @@
   <div class="widget recent">
     <h3 class="widget-title">最新文章</h3>
     <ul class="recent-post">
+      
+        <li class="recent-post-item">
+          <a class="recent-post-link" href="/2016/12/20/tomcat-domain-port.html">
+            tomcat多端口多域名访问
+          </a>
+        </li>
       
         <li class="recent-post-item">
           <a class="recent-post-link" href="/2016/11/20/springmvc-dispatcherServlet.html">
@@ -438,7 +443,7 @@
       标签云
     </h3>
     <div class="tagcloud-wrapper">
-      <a href="/tags/centos/" style="font-size: 22px;">centos</a> <a href="/tags/Shadowscoks/" style="font-size: 16px;">Shadowscoks</a> <a href="/tags/MariaDB/" style="font-size: 16px;">MariaDB</a> <a href="/tags/jdk8/" style="font-size: 16px;">jdk8</a> <a href="/tags/html/" style="font-size: 16px;">html</a> <a href="/tags/css/" style="font-size: 16px;">css</a> <a href="/tags/springmvc/" style="font-size: 16px;">springmvc</a>
+      <a href="/tags/html/" style="font-size: 16px;">html</a> <a href="/tags/css/" style="font-size: 16px;">css</a> <a href="/tags/centos/" style="font-size: 22px;">centos</a> <a href="/tags/Shadowscoks/" style="font-size: 16px;">Shadowscoks</a> <a href="/tags/tomcat/" style="font-size: 16px;">tomcat</a> <a href="/tags/jdk8/" style="font-size: 16px;">jdk8</a> <a href="/tags/MariaDB/" style="font-size: 16px;">MariaDB</a> <a href="/tags/springmvc/" style="font-size: 16px;">springmvc</a>
     </div>
   </div>
 
@@ -449,7 +454,7 @@
     <h3 class="widget-title">
       分类目录
     </h3>
-    <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/笔记/">笔记</a><span class="category-list-count">5</span></li></ul>
+    <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/笔记/">笔记</a><span class="category-list-count">6</span></li></ul>
   </div>
 
 
