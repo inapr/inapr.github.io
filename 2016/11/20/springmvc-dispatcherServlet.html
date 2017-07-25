@@ -1,42 +1,26 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-  <head>
+<html>
+<head>
     
-<title>DispatcherServlet调度流程 | zenghua&#39;s blog</title>
 
-<meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    
 
-
-  <meta name="description" content="记录成长，分享生活与技术的点滴"/>
+    
 
 
 
-  <meta name="keywords" content="springmvc,DispatcherServlet" />
-
-
-
-  <meta name="baidu-site-verification" content="0a275bcf7d954b807e1db498d8e5b192" />
-
-
-  <meta name="google-site-verification" content="j5dWC85DkoAfUR50W00ewfii3X9ouH55HnyBP6oZxGE" />
-
-
-<meta name="theme-color" content="#f75357" />
-<meta name="msapplication-navbutton-color" content="#f75357">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="#f75357">
-
-
-
-
-  <link rel="shortcut icon" href="/images/favicon.ico">
-
-
-<link rel="alternate" type="application/atom+xml" title="zenghua&#39;s blog" href="/atom.xml">
-
-<meta name="description" content="DispatcherServlet是前端控制器设计模式的实现，提供Spring Web MVC的集中访问点，而且负责职责的分派，而且与Spring IoC容器无缝集成，从而可以获得Spring的所有好处。
+    <meta charset="utf-8">
+    
+    
+    
+    <title>DispatcherServlet调度流程 | zenghua&#39;s blog | 实践是最好的成长 发表是最好的记忆</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="springmvc">
+    <meta name="description" content="DispatcherServlet是前端控制器设计模式的实现，提供Spring Web MVC的集中访问点，而且负责职责的分派，而且与Spring IoC容器无缝集成，从而可以获得Spring的所有好处。
 DispatcherServlet主要用作职责调度工作，本身主要用于控制流程，主要职责如下：1、文件上传解析，如果请求类型是multipart将通过MultipartResolver进行文件上传">
 <meta property="og:type" content="article">
 <meta property="og:title" content="DispatcherServlet调度流程">
@@ -49,369 +33,450 @@ DispatcherServlet主要用作职责调度工作，本身主要用于控制流程
 <meta name="twitter:title" content="DispatcherServlet调度流程">
 <meta name="twitter:description" content="DispatcherServlet是前端控制器设计模式的实现，提供Spring Web MVC的集中访问点，而且负责职责的分派，而且与Spring IoC容器无缝集成，从而可以获得Spring的所有好处。
 DispatcherServlet主要用作职责调度工作，本身主要用于控制流程，主要职责如下：1、文件上传解析，如果请求类型是multipart将通过MultipartResolver进行文件上传">
+    
+        <link rel="alternate" type="application/atom+xml" title="zenghua&#39;s blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+</head>
 
-<link rel="stylesheet" href="/css/font-awesome.css?t=1500696894685.css">
-<link rel="stylesheet" href="/css/style.css?t=1500696894685.css">
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">zenghua</h5>
+          <a href="mailto:zenghuayo@qq.com" title="zenghuayo@qq.com" class="mail">zenghuayo@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-link"></i>
+                测试
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">DispatcherServlet调度流程</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">DispatcherServlet调度流程</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-11-20T13:20:23.000Z" itemprop="datePublished" class="page-time">
+  2016-11-20
+</time>
 
 
-<script id="google_analytics">
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/笔记/">笔记</a></li></ul>
 
-      ga('create', 'UA-74273646-1', 'auto');
-      ga('send', 'pageview');
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+<article id="post-springmvc-dispatcherServlet"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">DispatcherServlet调度流程</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016-11-20 21:20:23" datetime="2016-11-20T13:20:23.000Z"  itemprop="datePublished">2016-11-20</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/笔记/">笔记</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>DispatcherServlet是前端控制器设计模式的实现，提供Spring Web MVC的集中访问点，<br>而且负责职责的分派，而且与Spring IoC容器无缝集成，从而可以获得Spring的所有好处。</p>
+<p>DispatcherServlet主要用作职责调度工作，本身主要用于控制流程，主要职责如下：<br>1、文件上传解析，如果请求类型是multipart将通过MultipartResolver进行文件上传解析；<br>2、通过HandlerMapping，将请求映射到处理器（返回一个HandlerExecutionChain，它包括一个处理器、多个HandlerInterceptor拦截器）；<br>3、通过HandlerAdapter支持多种类型的处理器(HandlerExecutionChain中的处理器)；<br>4、通过ViewResolver解析逻辑视图名到具体视图实现；<br>5、本地化解析；<br>6、渲染具体的视图等；<br>7、如果执行过程中遇到异常将交给HandlerExceptionResolver来解析。</p>
+<p>从以上我们可以看出DispatcherServlet主要负责流程的控制（而且在流程中的每个关键点都是很容易扩展的）。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2017-07-20T12:25:43.661Z" itemprop="dateUpdated">2017-07-20 20:25:43</time>
+</span><br>
+
+
+        
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2016/11/20/springmvc-dispatcherServlet.html" target="_blank" rel="external">http://zenghua.info/2016/11/20/springmvc-dispatcherServlet.html</a>
+        
+    </div>
+    <footer>
+        <a href="http://zenghua.info">
+            <img src="/img/avatar.jpg" alt="zenghua">
+            zenghua
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/springmvc/">springmvc</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://zenghua.info/2016/11/20/springmvc-dispatcherServlet.html&title=《DispatcherServlet调度流程》 — zenghua's blog&pic=http://zenghua.info/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://zenghua.info/2016/11/20/springmvc-dispatcherServlet.html&title=《DispatcherServlet调度流程》 — zenghua's blog&source=zenghua's blog" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://zenghua.info/2016/11/20/springmvc-dispatcherServlet.html" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《DispatcherServlet调度流程》 — zenghua's blog&url=http://zenghua.info/2016/11/20/springmvc-dispatcherServlet.html&via=http://zenghua.info" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://zenghua.info/2016/11/20/springmvc-dispatcherServlet.html" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/12/20/tomcat-domain-port.html" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">tomcat多端口多域名访问</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/11/14/display-visibility-hidden.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">css中display/visibility和html中hidden的区别</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+<section class="comments" id="comments">
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <script src="http://v2.uyan.cc/code/uyan.js?uid=2138467"></script>
+    <!-- UY END -->
+</section>
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>zenghua &copy; 2015 - 2017</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://zenghua.info/2016/11/20/springmvc-dispatcherServlet.html&title=《DispatcherServlet调度流程》 — zenghua's blog&pic=http://zenghua.info/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://zenghua.info/2016/11/20/springmvc-dispatcherServlet.html&title=《DispatcherServlet调度流程》 — zenghua's blog&source=zenghua's blog" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://zenghua.info/2016/11/20/springmvc-dispatcherServlet.html" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《DispatcherServlet调度流程》 — zenghua's blog&url=http://zenghua.info/2016/11/20/springmvc-dispatcherServlet.html&via=http://zenghua.info" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://zenghua.info/2016/11/20/springmvc-dispatcherServlet.html" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACoElEQVR42u3a0W7CMAwFUP7/p7fXSajl2o6BSYenaqVJTpEa77qPR/z5ufj8Pft8fH82uepqxsMfPDw8vENLf57+6i/VpeSj9WbHw8PDew/vahHJd/LN4B58aj14eHh438bLS+H7WeYbCR4eHt5/51XL6wkJDw8P7xt4eVA7Kbjz8XvhBR4eHt57eHkX6XuOV/p7eHh4eOOu+qlNojpy9ezlVXh4eHgLvGqDqhfONkOEQSMNDw8Pb49XjQCq1KTdlb9oVS708fDw8NZ4SRianM0x+U1JYKPWFx4eHt6Y12vw914pyDePakKLh4eHt83LH77VEOG+RJ5EFdF2goeHh7fAm3fYey9RzVdVKNzx8PDwFnjVcrbXpspjjiTyKG8VeHh4eId4k4Agb4xVS+T7uQqlOR4eHt6HeL02WLX43oiS8fDw8PZ4vVCg2gbLg9rqlnB5jIeHh7fGmxTN1WZ/sm0cuxYPDw9vgZeECPnLT8mjPMf3bu6L3xAPDw/vEG/SLZqX18lo1S3nWDMMDw8Pr8grPHYHhXLCboYReHh4eGu86kAbW0UyV/V1BDw8PLz38/LH/bxc7kUYeHh4eJ/lJWVu/p1JjJucLQTHeHh4eAu8vFCePLKrYUf1RhdWiIeHhzfm5WFETp0EHPnGEI2Gh4eH90ZeHkD0Ht/VlTRvHB4eHt4ar9fOz6PbvIyetMHw8PDwtnm9mKDaNquGtnlZ/+IqPDw8vAVeL4qdlN3Vgnhj28DDw8Ob83rFbu+VqeTBXb1BL0bGw8PDW+NVp+k1q6q349iehoeHh/dRXg6+vyr/ZjJO1ADDw8PD+xAvL77zQLYa7Oaz4+Hh4e3xeoVvDpu8cJD8DAeyFjw8PLzaLOX/6HuLmDTVFmMLPDw8vJT3CydcfYKbTQ/3AAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
 </script>
 
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
 
 
-  <script id="baidu_analytics">
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?0a275bcf7d954b807e1db498d8e5b192";
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
-  </script>
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
 
 
-<script id="baidu_push">
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
 })();
 </script>
 
 
-
-  </head>
-  <body>
-    <header class="header">
-  <div class="site-brand">
-    <div class="container">
-      <h1 class="site-title">
-        <a class="site-title-link" href="/.">
-          zenghua's blog
-        </a>
-      </h1>
-    </div>
-  </div>
-  <nav class="site-nav">
-    <div class="container">
-      <ul class="site-nav-menu">
-        
-          
-          
-          <li class="site-nav-item">
-            <a class="site-nav-link " href="/">
-              
-              
-                首页
-              
-            </a>
-          </li>
-        
-          
-          
-          <li class="site-nav-item">
-            <a class="site-nav-link " href="/categories/笔记/">
-              
-              
-                笔记
-              
-            </a>
-          </li>
-        
-          
-          
-          <li class="site-nav-item">
-            <a class="site-nav-link " href="/archives/">
-              
-              
-                归档
-              
-            </a>
-          </li>
-        
-          
-          
-          <li class="site-nav-item">
-            <a class="site-nav-link " href="/about/">
-              
-              
-                关于
-              
-            </a>
-          </li>
-        
-      </ul>
-      <div class="site-nav-icon">
-        <a class="site-icon-link" href="/atom.xml">
-          <i class="fa fa-rss"></i>
-        </a>
-        
-          <a class="site-icon-link" href="https://github.com/">
-            <i class="fa fa-github"></i>
-          </a>
-        
-      </div>
-    </div>
-  </nav>
-</header>
-
-    <div class="content">
-      <div class="container">
-  <main class="main">
-    <article class="article">
-  <header class="article-header">
-    <div class="article-meta">
-  <div class="article-date">
-    2016年11月20日
-  </div>
-  <div class="article-categories">
-    <i class="fa fa-caret-right"></i>
-    
-      <a class="article-category" href="/categories/笔记/">
-        笔记
-      </a>
-    
-  </div>
-</div>
-
-    <h2 class="article-title">
-  
-    DispatcherServlet调度流程
-  
-</h2>
-
-  </header>
-  <div class="article-body markdown">
-    
-    
-      <p>DispatcherServlet是前端控制器设计模式的实现，提供Spring Web MVC的集中访问点，<br>而且负责职责的分派，而且与Spring IoC容器无缝集成，从而可以获得Spring的所有好处。</p>
-<p>DispatcherServlet主要用作职责调度工作，本身主要用于控制流程，主要职责如下：<br>1、文件上传解析，如果请求类型是multipart将通过MultipartResolver进行文件上传解析；<br>2、通过HandlerMapping，将请求映射到处理器（返回一个HandlerExecutionChain，它包括一个处理器、多个HandlerInterceptor拦截器）；<br>3、通过HandlerAdapter支持多种类型的处理器(HandlerExecutionChain中的处理器)；<br>4、通过ViewResolver解析逻辑视图名到具体视图实现；<br>5、本地化解析；<br>6、渲染具体的视图等；<br>7、如果执行过程中遇到异常将交给HandlerExceptionResolver来解析。</p>
-<p>从以上我们可以看出DispatcherServlet主要负责流程的控制（而且在流程中的每个关键点都是很容易扩展的）。</p>
-
-    
-  </div>
-  
-    <footer class="article-footer">
-      <div class="article-tags">
-  
-    <a class="article-tag" href="/tags/springmvc/">
-      <i class="fa fa-tag"></i>
-      springmvc
-    </a>
-  
-</div>
-
-      
-  <div class="article-pagination">
-    
-      <div class="next-article">
-        <a class="article-link" href="/2016/11/14/display-visibility-hidden.html">
-          <span class="hint">
-            <i class="fa fa-chevron-left"></i>
-            旧文章
-          </span>
-          <span class="title">css中display/visibility和html中hidden的区别</span>
-        </a>
-      </div>
-    
-    
-      <div class="prev-article">
-        <a class="article-link" href="/2016/12/20/tomcat-domain-port.html">
-          <span class="hint">
-            新文章
-            <i class="fa fa-chevron-right"></i>
-          </span>
-          <span class="title">tomcat多端口多域名访问</span>
-        </a>
-      </div>
-    
-  </div>
-
-
-    </footer>
-  
-</article>
-
-    
-  <!-- 别人用的是disqus
-  <div id="disqus_thread">
-    <noscript>
-      Please enable JavaScript to view the
-      <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
-    </noscript>
-  </div>
-  <script id="disqus">
-    var disqus_config = function () {
-        this.page.url = 'http://zenghua.info/2016/11/20/springmvc-dispatcherServlet.html';
-        this.page.identifier = '2016/11/20/springmvc-dispatcherServlet.html';
-        this.page.title = 'DispatcherServlet调度流程';
-    };
-    (function() {
-    var d = document, s = d.createElement('script');
-
-      s.src = '//2138467.disqus.com/embed.js';
-
-    s.setAttribute('data-timestamp', +new Date());
-    (d.head || d.body).appendChild(s);
-    })();  
-  </script>
-  -->
-  
-<!-- 我用的友言 -->
-<!-- UY BEGIN -->
-<div id="uyan_frame"></div>
-<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2138467"></script>
-<!-- UY END -->
-  
-  
-
-  </main>
-  <aside class="sidebar">
-  
-    
-  <div class="widget recent">
-    <h3 class="widget-title">最新文章</h3>
-    <ul class="recent-post">
-      
-        <li class="recent-post-item">
-          <a class="recent-post-link" href="/2017/01/20/git-cmd.html">
-            GIT常用命令
-          </a>
-        </li>
-      
-        <li class="recent-post-item">
-          <a class="recent-post-link" href="/2016/12/20/tomcat-domain-port.html">
-            tomcat多端口多域名访问
-          </a>
-        </li>
-      
-        <li class="recent-post-item">
-          <a class="recent-post-link" href="/2016/11/20/springmvc-dispatcherServlet.html">
-            DispatcherServlet调度流程
-          </a>
-        </li>
-      
-        <li class="recent-post-item">
-          <a class="recent-post-link" href="/2016/11/14/display-visibility-hidden.html">
-            css中display/visibility和html中hidden的区别
-          </a>
-        </li>
-      
-        <li class="recent-post-item">
-          <a class="recent-post-link" href="/2016/10/15/centos-installation-shadowscoks.html">
-            使用阿里云ECS CentOS 搭建Shadowscoks
-          </a>
-        </li>
-      
-        <li class="recent-post-item">
-          <a class="recent-post-link" href="/2016/10/14/centos-installation-jdk8.html">
-            centos7.2使用rpm安装jdk8
-          </a>
-        </li>
-      
-        <li class="recent-post-item">
-          <a class="recent-post-link" href="/2016/10/10/centos-yum-installation-mariadb.html">
-            Centos7.2使用yum安装MariaDB10.1
-          </a>
-        </li>
-      
-        <li class="recent-post-item">
-          <a class="recent-post-link" href="/2016/09/29/hello-world.html">
-            hello-world
-          </a>
-        </li>
-      
-    </ul>
-  </div>
-
-
-  
-    
-  <div class="widget tagcloud">
-    <h3 class="widget-title">
-      标签云
-    </h3>
-    <div class="tagcloud-wrapper">
-      <a href="/tags/centos/" style="font-size: 22px;">centos</a> <a href="/tags/Shadowscoks/" style="font-size: 16px;">Shadowscoks</a> <a href="/tags/jdk8/" style="font-size: 16px;">jdk8</a> <a href="/tags/MariaDB/" style="font-size: 16px;">MariaDB</a> <a href="/tags/git/" style="font-size: 16px;">git</a> <a href="/tags/html/" style="font-size: 16px;">html</a> <a href="/tags/css/" style="font-size: 16px;">css</a> <a href="/tags/springmvc/" style="font-size: 16px;">springmvc</a> <a href="/tags/tomcat/" style="font-size: 16px;">tomcat</a>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget categories">
-    <h3 class="widget-title">
-      分类目录
-    </h3>
-    <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/笔记/">笔记</a><span class="category-list-count">7</span></li></ul>
-  </div>
-
-
-  
-    <div class="widget links">
-  <h3 class="widget-title">
-    友情链接
-  </h3>
-  <ul class="link-list">
-    
-      <li class="link-list-item">
-        <a class="link-list-link" href="http://www.ahonn.me/">
-          ahonn
-        </a>
-      </li>
-    
-      <li class="link-list-item">
-        <a class="link-list-link" href="https://www.ileyar.com/">
-          leyar
-        </a>
-      </li>
-    
-      <li class="link-list-item">
-        <a class="link-list-link" href="http://www.yzz1995.cn/">
-          yzzting
-        </a>
-      </li>
-    
-      <li class="link-list-item">
-        <a class="link-list-link" href="http://blog.co1mugx.tk/">
-          co1mugx
-        </a>
-      </li>
-    
-  </ul>
-</div>
-
-  
-</aside>
-
-</div>
-
-    </div>
-    <footer class="footer">
-  <div class="container">
-    <p class="copyright">
-      
-      Copyright &copy; 2017. All Rights Reserved.
-    </p>
-    <p class="power-by">
-      Power by <a href="https://hexo.io/">Hexo</a> and Theme by <a href="https://github.com/ahonn/hexo-theme-hello">Hello</a>.
-    </p>
-  </div>
-</footer>
 
 </body>
 </html>
